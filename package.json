@@ -1,0 +1,28 @@
+{
+  "name": "idevjs-angualr-client",
+  "version": "0.0.1",
+  "description": "Angular2 Client for iDevJS.com",
+  "main": "api.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iDevJS/iDevJS-Angular-Client.git"
+  },
+  "keywords": [
+    "idevjs",
+    "angular2",
+    "client",
+    "api"
+  ],
+  "author": "xuhong",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/iDevJS/iDevJS-Angular-Client/issues"
+  },
+  "homepage": "https://github.com/iDevJS/iDevJS-Angular-Client#readme",
+  "peerDependencies": {
+    "angular2": "^2.0.0-beta.12"
+  }
+}
