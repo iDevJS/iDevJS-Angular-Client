@@ -67,7 +67,6 @@ export class Client {
     }
 
     // post
-    @Auth('idevjs_token')
     getPostList(start: number = 0, count: number = 30) {
         return this._request({
             url: '/post',
@@ -114,7 +113,7 @@ export class Client {
 
     // comment
 
-    getPostComment(id, start: number = 0, count: number = 30) {
+    getPostCommentList(id, start: number = 0, count: number = 30) {
         return this._request({
             url: `/post/${id}/comment`,
             search: `start=${start}&count=${count}`,
@@ -131,18 +130,67 @@ export class Client {
         }, true)
     }
 
-    getUserComment(id, start: number = 0, count: number = 30) {
+    getUserCommentList(id, start: number = 0, count: number = 30) {
         return this._request({
             url: `/user/${id}/comment`,
             search: `start=${start}&count=${count}`,
             method: RequestMethod.Get
         })
     }
+    
+    // node
+    getNodeList(){
+        return this._request({
+            url: `/node`,
+            method: RequestMethod.Get
+        })
+    }
+    getNode(name){
+        return this._request({
+            url: `/node/${name}`,
+            method: RequestMethod.Get
+        })
+    }
+    
+    // user 
+    @Auth('idevjs_token')
+    getUser(){
+        return this._request({
+            url: '/me',
+            method: RequestMethod.Get
+        }, true)
+    }
+    
+    @Auth('idevjs_token')
+    updateUserProfile(data){
+        let body = JSON.stringify(data)
+        return this._request({
+            url: '/me',
+            method: RequestMethod.Post
+        }, true)
+    }
+    
+    @Auth('idevjs_token')
+    getUserSetting(){
+        return this._request({
+            url: '/setting',
+            method: RequestMethod.Get
+        }, true)
+    }
+    
+    @Auth('idevjs_token')
+    updateUserSetting(data){
+        let body = JSON.stringify(data)
+        return this._request({
+            url: '/setting',
+            method: RequestMethod.Post
+        }, true)
+    }
 }
 
 export function unAuthorizedResponse() {
     return new Observable((observer => {
-        observer.next(new Response(new ResponseOptions({
+        observer.onError(new Response(new ResponseOptions({
             status: 403,
             statusText: 'unAuthorized',
             type: ResponseType.Error
@@ -157,7 +205,7 @@ export function Auth(tokenName) {
         if (!localStorage.getItem(tokenName)) {
             descriptor.value = () => {
                 return new Observable((observer => {
-                    observer.next(new Response(new ResponseOptions({
+                    observer.onError(new Response(new ResponseOptions({
                         status: 403,
                         statusText: 'unAuthorized',
                         type: ResponseType.Error
