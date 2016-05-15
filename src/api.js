@@ -5,12 +5,15 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var core_1 = require('angular2/core');
-var http_1 = require('angular2/http');
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var core_1 = require('@angular/core');
+var http_1 = require('@angular/http');
 var Observable_1 = require('rxjs/Observable');
 var AuthConfig = (function () {
     function AuthConfig(options) {
-        this.baseUrl = options.baseUrl || 'http://api.idevjs.com:4000';
+        this.baseUrl = options.baseUrl || 'http://api.idevjs.com';
         this.version = options.version || 'v1';
         this.tokenName = options.tokenName || 'idevjs_token';
         this.headerName = options.headerName || 'Authorization';
@@ -26,7 +29,8 @@ var AuthConfig = (function () {
         };
     };
     AuthConfig = __decorate([
-        core_1.Injectable()
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [Object])
     ], AuthConfig);
     return AuthConfig;
 }());
@@ -46,7 +50,7 @@ var Client = (function () {
     Client.prototype._request = function (options, auth) {
         if (auth) {
             if (localStorage.getItem(this._config.tokenName)) {
-                this.defaultOptions.headers.append('Authorization', 'Bearer ' + localStorage.getItem(this._config.tokenName));
+                this.defaultOptions.headers.set('Authorization', 'Bearer ' + localStorage.getItem(this._config.tokenName));
             }
             else {
             }
@@ -100,6 +104,14 @@ var Client = (function () {
         var body = JSON.stringify(data);
         return this._request({
             url: "/post/" + id,
+            body: body,
+            method: http_1.RequestMethod.Post
+        }, true);
+    };
+    Client.prototype.addPost = function (data) {
+        var body = JSON.stringify(data);
+        return this._request({
+            url: "/post",
             body: body,
             method: http_1.RequestMethod.Post
         }, true);
@@ -172,22 +184,44 @@ var Client = (function () {
         }, true);
     };
     __decorate([
-        Auth('idevjs_token')
+        Auth('idevjs_token'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', [Object, Object]), 
+        __metadata('design:returntype', void 0)
     ], Client.prototype, "updatePost", null);
     __decorate([
-        Auth('idevjs_token')
+        Auth('idevjs_token'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', [Object]), 
+        __metadata('design:returntype', void 0)
+    ], Client.prototype, "addPost", null);
+    __decorate([
+        Auth('idevjs_token'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
     ], Client.prototype, "getUser", null);
     __decorate([
-        Auth('idevjs_token')
+        Auth('idevjs_token'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', [Object]), 
+        __metadata('design:returntype', void 0)
     ], Client.prototype, "updateUserProfile", null);
     __decorate([
-        Auth('idevjs_token')
+        Auth('idevjs_token'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', []), 
+        __metadata('design:returntype', void 0)
     ], Client.prototype, "getUserSetting", null);
     __decorate([
-        Auth('idevjs_token')
+        Auth('idevjs_token'), 
+        __metadata('design:type', Function), 
+        __metadata('design:paramtypes', [Object]), 
+        __metadata('design:returntype', void 0)
     ], Client.prototype, "updateUserSetting", null);
     Client = __decorate([
-        core_1.Injectable()
+        core_1.Injectable(), 
+        __metadata('design:paramtypes', [AuthConfig, http_1.Http])
     ], Client);
     return Client;
 }());

@@ -5,9 +5,10 @@
         "noImplicitAny": false,
         "sourceMap": false,
         "emitDecoratorMetadata": true,
-                "experimentalDecorators": true
+        "experimentalDecorators": true
     },
-    "exclude": [
-        "node_modules"
+    "files": [
+        "src/api.ts",
+        "index.ts"
     ]
 }

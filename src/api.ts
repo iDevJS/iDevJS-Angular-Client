@@ -1,5 +1,5 @@
-import {provide, Provider, Injectable} from 'angular2/core'
-import {Http, Headers, Request, RequestMethod, RequestOptions, RequestOptionsArgs, Response, ResponseOptions, ResponseOptionsArgs, ResponseType} from 'angular2/http'
+import {provide, Provider, Injectable} from '@angular/core'
+import {Http, Headers, Request, RequestMethod, RequestOptions, RequestOptionsArgs, Response, ResponseOptions, ResponseOptionsArgs, ResponseType} from '@angular/http'
 import {Observable} from 'rxjs/Observable'
 
 interface AuthConfigInterface {
@@ -18,7 +18,7 @@ export class AuthConfig {
     headerName: string
     headerPrefix: string
     constructor(options?: any) {
-        this.baseUrl = options.baseUrl || 'http://api.idevjs.com:4000'
+        this.baseUrl = options.baseUrl || 'http://api.idevjs.com'
         this.version = options.version || 'v1'
         this.tokenName = options.tokenName || 'idevjs_token'
         this.headerName = options.headerName || 'Authorization'
@@ -56,7 +56,7 @@ export class Client {
     _request(options: RequestOptionsArgs, auth?: boolean) {
         if (auth) {
             if (localStorage.getItem(this._config.tokenName)) {
-                this.defaultOptions.headers.append('Authorization', 'Bearer ' + localStorage.getItem(this._config.tokenName))
+                this.defaultOptions.headers.set('Authorization', 'Bearer ' + localStorage.getItem(this._config.tokenName))
             } else {
 
             }
@@ -110,7 +110,15 @@ export class Client {
             method: RequestMethod.Post
         }, true)
     }
-
+    @Auth('idevjs_token')
+    addPost(data) {
+        let body = JSON.stringify(data)
+        return this._request({
+            url: `/post`,
+            body: body,
+            method: RequestMethod.Post
+        }, true)
+    }
     // comment
 
     getPostCommentList(id, start: number = 0, count: number = 30) {
