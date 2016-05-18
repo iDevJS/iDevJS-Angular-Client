@@ -7,6 +7,9 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true
     },
+    // "exclude": [
+    //     "node_modules/"
+    // ]
     "files": [
         "src/api.ts",
         "index.ts"

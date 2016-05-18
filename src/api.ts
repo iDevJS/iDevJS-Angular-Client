@@ -1,5 +1,6 @@
 import {provide, Provider, Injectable} from '@angular/core'
 import {Http, Headers, Request, RequestMethod, RequestOptions, RequestOptionsArgs, Response, ResponseOptions, ResponseOptionsArgs, ResponseType} from '@angular/http'
+import 'rxjs/add/operator/map'
 import {Observable} from 'rxjs/Observable'
 
 interface AuthConfigInterface {
@@ -67,16 +68,23 @@ export class Client {
     }
 
     // post
-    getPostList(start: number = 0, count: number = 30) {
+    getPostList(start: number = 0, count: number = 30, tab?: string) {
         return this._request({
             url: '/post',
-            search: `start=${start}&count=${count}`,
+            search: `start=${start}&count=${count}&tab=${tab}`,
             method: RequestMethod.Get
         })
     }
-    getNodePostList(node: string, start: number = 0, count: number = 30) {
+    getNodePostList(node: string, start: number = 0, count: number = 30, tab?: string) {
         return this._request({
             url: `/node/${node}/post`,
+            search: `start=${start}&count=${count}&tab=${tab}"`,
+            method: RequestMethod.Get
+        })
+    }
+    getUserPostList(id: string, start: number = 0, count: number = 30) {
+        return this._request({
+            url: `/user/${id}/post`,
             search: `start=${start}&count=${count}`,
             method: RequestMethod.Get
         })
@@ -91,13 +99,6 @@ export class Client {
         return this._request({
             url: `/post/${id}`,
             search: 'content_format=markdown',
-            method: RequestMethod.Get
-        })
-    }
-    getUserPostList(id: string, start: number = 0, count: number = 30) {
-        return this._request({
-            url: `/user/${id}/post`,
-            search: `start=${start}&count=${count}`,
             method: RequestMethod.Get
         })
     }
@@ -119,8 +120,8 @@ export class Client {
             method: RequestMethod.Post
         }, true)
     }
+    
     // comment
-
     getPostCommentList(id, start: number = 0, count: number = 30) {
         return this._request({
             url: `/post/${id}/comment`,
@@ -128,7 +129,7 @@ export class Client {
             method: RequestMethod.Get
         })
     }
-
+    @Auth('idevjs_token')
     addPostComment(id, content) {
         let body = JSON.stringify({ content: content })
         return this._request({
@@ -145,53 +146,70 @@ export class Client {
             method: RequestMethod.Get
         })
     }
-    
+
     // node
-    getNodeList(){
+    getNodeList() {
         return this._request({
             url: `/node`,
             method: RequestMethod.Get
         })
     }
-    getNode(name){
+    getNode(name) {
         return this._request({
             url: `/node/${name}`,
             method: RequestMethod.Get
         })
     }
-    
+
     // user 
+    getUser(id) {
+        return this._request({
+            url: `/u/${id}`,
+            method: RequestMethod.Get
+        })
+    }
     @Auth('idevjs_token')
-    getUser(){
+    getSelf() {
         return this._request({
             url: '/me',
             method: RequestMethod.Get
         }, true)
     }
-    
+
     @Auth('idevjs_token')
-    updateUserProfile(data){
+    updateUserProfile(data) {
         let body = JSON.stringify(data)
         return this._request({
             url: '/me',
             method: RequestMethod.Post
         }, true)
     }
-    
+
     @Auth('idevjs_token')
-    getUserSetting(){
+    getUserSetting() {
         return this._request({
             url: '/setting',
             method: RequestMethod.Get
         }, true)
     }
-    
+
     @Auth('idevjs_token')
-    updateUserSetting(data){
+    updateUserSetting(data) {
         let body = JSON.stringify(data)
         return this._request({
             url: '/setting',
             method: RequestMethod.Post
+        }, true)
+    }
+    @Auth('idevjs_token')
+    uploadImage(data) {
+        let body = JSON.stringify(data)
+        return this._request({
+            url: '/images',
+            method: RequestMethod.Post,
+            headers: new Headers({
+                'Content-type': 'multipart/form-data;'
+            })
         }, true)
     }
 }
@@ -207,7 +225,7 @@ export function unAuthorizedResponse() {
 }
 
 export function Auth(tokenName) {
-    return function(target: Client, propertyKey: string, descriptor: any) {
+    return function (target: Client, propertyKey: string, descriptor: any) {
         let originalMethod = descriptor.value
 
         if (!localStorage.getItem(tokenName)) {
