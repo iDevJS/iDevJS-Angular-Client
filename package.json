@@ -1,6 +1,6 @@
 {
   "name": "idevjs-angular-client",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Angular2 Client for iDevJS.com",
   "main": "index.js",
   "scripts": {
