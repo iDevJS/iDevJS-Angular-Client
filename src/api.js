@@ -61,43 +61,39 @@ var Client = (function () {
             .map(function (res) { return res.json(); });
     };
     // post
-    Client.prototype.getPostList = function (start, count, tab) {
-        if (start === void 0) { start = 0; }
-        if (count === void 0) { count = 30; }
+    Client.prototype.getPostList = function (params) {
+        var searchParams = new http_1.URLSearchParams();
+        Object.keys(params).forEach(function (key) { searchParams.append(key, params[key]); });
         return this._request({
             url: '/post',
-            search: "start=" + start + "&count=" + count + "&tab=" + tab,
+            search: searchParams,
             method: http_1.RequestMethod.Get
         });
     };
-    Client.prototype.getNodePostList = function (node, start, count, tab) {
-        if (start === void 0) { start = 0; }
-        if (count === void 0) { count = 30; }
+    Client.prototype.getNodePostList = function (node, params) {
+        var searchParams = new http_1.URLSearchParams();
+        Object.keys(params).forEach(function (key) { searchParams.append(key, params[key]); });
         return this._request({
             url: "/node/" + node + "/post",
-            search: "start=" + start + "&count=" + count + "&tab=" + tab + "\"",
+            search: searchParams,
             method: http_1.RequestMethod.Get
         });
     };
-    Client.prototype.getUserPostList = function (id, start, count) {
-        if (start === void 0) { start = 0; }
-        if (count === void 0) { count = 30; }
+    Client.prototype.getUserPostList = function (id, params) {
+        var searchParams = new http_1.URLSearchParams();
+        Object.keys(params).forEach(function (key) { searchParams.append(key, params[key]); });
         return this._request({
             url: "/user/" + id + "/post",
-            search: "start=" + start + "&count=" + count,
+            search: searchParams,
             method: http_1.RequestMethod.Get
         });
     };
-    Client.prototype.getPost = function (id) {
+    Client.prototype.getPost = function (id, params) {
+        var searchParams = new http_1.URLSearchParams();
+        Object.keys(params).forEach(function (key) { searchParams.append(key, params[key]); });
         return this._request({
             url: "/post/" + id,
-            method: http_1.RequestMethod.Get
-        });
-    };
-    Client.prototype.getPostRaw = function (id) {
-        return this._request({
-            url: "/post/" + id,
-            search: 'content_format=markdown',
+            search: searchParams,
             method: http_1.RequestMethod.Get
         });
     };
@@ -118,12 +114,12 @@ var Client = (function () {
         }, true);
     };
     // comment
-    Client.prototype.getPostCommentList = function (id, start, count) {
-        if (start === void 0) { start = 0; }
-        if (count === void 0) { count = 30; }
+    Client.prototype.getPostCommentList = function (id, params) {
+        var searchParams = new http_1.URLSearchParams();
+        Object.keys(params).forEach(function (key) { searchParams.append(key, params[key]); });
         return this._request({
             url: "/post/" + id + "/comment",
-            search: "start=" + start + "&count=" + count,
+            search: searchParams,
             method: http_1.RequestMethod.Get
         });
     };
@@ -135,12 +131,12 @@ var Client = (function () {
             method: http_1.RequestMethod.Post
         }, true);
     };
-    Client.prototype.getUserCommentList = function (id, start, count) {
-        if (start === void 0) { start = 0; }
-        if (count === void 0) { count = 30; }
+    Client.prototype.getUserCommentList = function (id, params) {
+        var searchParams = new http_1.URLSearchParams();
+        Object.keys(params).forEach(function (key) { searchParams.append(key, params[key]); });
         return this._request({
             url: "/user/" + id + "/comment",
-            search: "start=" + start + "&count=" + count,
+            search: searchParams,
             method: http_1.RequestMethod.Get
         });
     };

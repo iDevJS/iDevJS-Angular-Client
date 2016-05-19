@@ -1,5 +1,5 @@
 import {provide, Provider, Injectable} from '@angular/core'
-import {Http, Headers, Request, RequestMethod, RequestOptions, RequestOptionsArgs, Response, ResponseOptions, ResponseOptionsArgs, ResponseType} from '@angular/http'
+import {Http, URLSearchParams, Headers, Request, RequestMethod, RequestOptions, RequestOptionsArgs, Response, ResponseOptions, ResponseOptionsArgs, ResponseType} from '@angular/http'
 import 'rxjs/add/operator/map'
 import {Observable} from 'rxjs/Observable'
 
@@ -68,37 +68,43 @@ export class Client {
     }
 
     // post
-    getPostList(start: number = 0, count: number = 30, tab?: string) {
+    getPostList(params) {
+        let searchParams = new URLSearchParams()
+        Object.keys(params).forEach(key =>{searchParams.append(key, params[key])})
+        
         return this._request({
             url: '/post',
-            search: `start=${start}&count=${count}&tab=${tab}`,
+            search: searchParams,
             method: RequestMethod.Get
         })
     }
-    getNodePostList(node: string, start: number = 0, count: number = 30, tab?: string) {
+    getNodePostList(node: string, params) {
+        let searchParams = new URLSearchParams()
+        Object.keys(params).forEach(key =>{searchParams.append(key, params[key])})
+        
         return this._request({
             url: `/node/${node}/post`,
-            search: `start=${start}&count=${count}&tab=${tab}"`,
+            search: searchParams,
             method: RequestMethod.Get
         })
     }
-    getUserPostList(id: string, start: number = 0, count: number = 30) {
+    getUserPostList(id: string, params) {
+        let searchParams = new URLSearchParams()
+        Object.keys(params).forEach(key =>{searchParams.append(key, params[key])})
+        
         return this._request({
             url: `/user/${id}/post`,
-            search: `start=${start}&count=${count}`,
+            search: searchParams,
             method: RequestMethod.Get
         })
     }
-    getPost(id: string) {
+    getPost(id: string, params) {
+        let searchParams = new URLSearchParams()
+        Object.keys(params).forEach(key =>{searchParams.append(key, params[key])})
+        
         return this._request({
             url: `/post/${id}`,
-            method: RequestMethod.Get
-        })
-    }
-    getPostRaw(id: string) {
-        return this._request({
-            url: `/post/${id}`,
-            search: 'content_format=markdown',
+            search: searchParams,
             method: RequestMethod.Get
         })
     }
@@ -120,12 +126,15 @@ export class Client {
             method: RequestMethod.Post
         }, true)
     }
-    
+
     // comment
-    getPostCommentList(id, start: number = 0, count: number = 30) {
+    getPostCommentList(id:string, params) {
+        let searchParams = new URLSearchParams()
+        Object.keys(params).forEach(key =>{searchParams.append(key, params[key])})
+        
         return this._request({
             url: `/post/${id}/comment`,
-            search: `start=${start}&count=${count}`,
+            search: searchParams,
             method: RequestMethod.Get
         })
     }
@@ -139,10 +148,13 @@ export class Client {
         }, true)
     }
 
-    getUserCommentList(id, start: number = 0, count: number = 30) {
+    getUserCommentList(id, params) {
+        let searchParams = new URLSearchParams()
+        Object.keys(params).forEach(key =>{searchParams.append(key, params[key])})
+       
         return this._request({
             url: `/user/${id}/comment`,
-            search: `start=${start}&count=${count}`,
+            search: searchParams,
             method: RequestMethod.Get
         })
     }
