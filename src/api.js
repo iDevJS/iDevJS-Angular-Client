@@ -63,7 +63,7 @@ var Client = (function () {
     // post
     Client.prototype.getPostList = function (params) {
         var searchParams = new http_1.URLSearchParams();
-        Object.keys(params).forEach(function (key) { searchParams.append(key, params[key]); });
+        Object.keys(params || {}).forEach(function (key) { searchParams.append(key, params[key]); });
         return this._request({
             url: '/post',
             search: searchParams,
@@ -72,7 +72,7 @@ var Client = (function () {
     };
     Client.prototype.getNodePostList = function (node, params) {
         var searchParams = new http_1.URLSearchParams();
-        Object.keys(params).forEach(function (key) { searchParams.append(key, params[key]); });
+        Object.keys(params || {}).forEach(function (key) { searchParams.append(key, params[key]); });
         return this._request({
             url: "/node/" + node + "/post",
             search: searchParams,
@@ -81,7 +81,7 @@ var Client = (function () {
     };
     Client.prototype.getUserPostList = function (id, params) {
         var searchParams = new http_1.URLSearchParams();
-        Object.keys(params).forEach(function (key) { searchParams.append(key, params[key]); });
+        Object.keys(params || {}).forEach(function (key) { searchParams.append(key, params[key]); });
         return this._request({
             url: "/user/" + id + "/post",
             search: searchParams,
@@ -90,7 +90,7 @@ var Client = (function () {
     };
     Client.prototype.getPost = function (id, params) {
         var searchParams = new http_1.URLSearchParams();
-        Object.keys(params).forEach(function (key) { searchParams.append(key, params[key]); });
+        Object.keys(params || {}).forEach(function (key) { searchParams.append(key, params[key]); });
         return this._request({
             url: "/post/" + id,
             search: searchParams,
@@ -116,7 +116,7 @@ var Client = (function () {
     // comment
     Client.prototype.getPostCommentList = function (id, params) {
         var searchParams = new http_1.URLSearchParams();
-        Object.keys(params).forEach(function (key) { searchParams.append(key, params[key]); });
+        Object.keys(params || {}).forEach(function (key) { searchParams.append(key, params[key]); });
         return this._request({
             url: "/post/" + id + "/comment",
             search: searchParams,
@@ -133,7 +133,7 @@ var Client = (function () {
     };
     Client.prototype.getUserCommentList = function (id, params) {
         var searchParams = new http_1.URLSearchParams();
-        Object.keys(params).forEach(function (key) { searchParams.append(key, params[key]); });
+        Object.keys(params || {}).forEach(function (key) { searchParams.append(key, params[key]); });
         return this._request({
             url: "/user/" + id + "/comment",
             search: searchParams,

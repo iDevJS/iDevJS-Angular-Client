@@ -70,38 +70,38 @@ export class Client {
     // post
     getPostList(params) {
         let searchParams = new URLSearchParams()
-        Object.keys(params).forEach(key =>{searchParams.append(key, params[key])})
-        
+        Object.keys(params || {}).forEach(key => { searchParams.append(key, params[key]) })
+
         return this._request({
             url: '/post',
             search: searchParams,
             method: RequestMethod.Get
         })
     }
-    getNodePostList(node: string, params) {
+    getNodePostList(node: string, params?: Object) {
         let searchParams = new URLSearchParams()
-        Object.keys(params).forEach(key =>{searchParams.append(key, params[key])})
-        
+        Object.keys(params || {}).forEach(key => { searchParams.append(key, params[key]) })
+
         return this._request({
             url: `/node/${node}/post`,
             search: searchParams,
             method: RequestMethod.Get
         })
     }
-    getUserPostList(id: string, params) {
+    getUserPostList(id: string, params?: Object) {
         let searchParams = new URLSearchParams()
-        Object.keys(params).forEach(key =>{searchParams.append(key, params[key])})
-        
+        Object.keys(params || {}).forEach(key => { searchParams.append(key, params[key]) })
+
         return this._request({
             url: `/user/${id}/post`,
             search: searchParams,
             method: RequestMethod.Get
         })
     }
-    getPost(id: string, params) {
+    getPost(id: string, params?: Object) {
         let searchParams = new URLSearchParams()
-        Object.keys(params).forEach(key =>{searchParams.append(key, params[key])})
-        
+        Object.keys(params || {}).forEach(key => { searchParams.append(key, params[key]) })
+
         return this._request({
             url: `/post/${id}`,
             search: searchParams,
@@ -128,10 +128,10 @@ export class Client {
     }
 
     // comment
-    getPostCommentList(id:string, params) {
+    getPostCommentList(id: string, params?: Object) {
         let searchParams = new URLSearchParams()
-        Object.keys(params).forEach(key =>{searchParams.append(key, params[key])})
-        
+        Object.keys(params || {}).forEach(key => { searchParams.append(key, params[key]) })
+
         return this._request({
             url: `/post/${id}/comment`,
             search: searchParams,
@@ -148,10 +148,10 @@ export class Client {
         }, true)
     }
 
-    getUserCommentList(id, params) {
+    getUserCommentList(id, params?: Object) {
         let searchParams = new URLSearchParams()
-        Object.keys(params).forEach(key =>{searchParams.append(key, params[key])})
-       
+        Object.keys(params || {}).forEach(key => { searchParams.append(key, params[key]) })
+
         return this._request({
             url: `/user/${id}/comment`,
             search: searchParams,
