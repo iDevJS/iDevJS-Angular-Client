@@ -88,12 +88,12 @@ export class Client {
             method: RequestMethod.Get
         })
     }
-    getUserPostList(id: string, params?: Object) {
+    getUserPostList(name: string, params?: Object) {
         let searchParams = new URLSearchParams()
         Object.keys(params || {}).forEach(key => { searchParams.append(key, params[key]) })
 
         return this._request({
-            url: `/user/${id}/post`,
+            url: `/user/${name}/post`,
             search: searchParams,
             method: RequestMethod.Get
         })
@@ -147,13 +147,12 @@ export class Client {
             method: RequestMethod.Post
         }, true)
     }
-
-    getUserCommentList(id, params?: Object) {
+    getUserCommentList(name, params?: Object) {
         let searchParams = new URLSearchParams()
         Object.keys(params || {}).forEach(key => { searchParams.append(key, params[key]) })
 
         return this._request({
-            url: `/user/${id}/comment`,
+            url: `/user/${name}/comment`,
             search: searchParams,
             method: RequestMethod.Get
         })
@@ -174,9 +173,9 @@ export class Client {
     }
 
     // user 
-    getUser(id) {
+    getUser(name) {
         return this._request({
-            url: `/u/${id}`,
+            url: `/u/${name}`,
             method: RequestMethod.Get
         })
     }

@@ -79,11 +79,11 @@ var Client = (function () {
             method: http_1.RequestMethod.Get
         });
     };
-    Client.prototype.getUserPostList = function (id, params) {
+    Client.prototype.getUserPostList = function (name, params) {
         var searchParams = new http_1.URLSearchParams();
         Object.keys(params || {}).forEach(function (key) { searchParams.append(key, params[key]); });
         return this._request({
-            url: "/user/" + id + "/post",
+            url: "/user/" + name + "/post",
             search: searchParams,
             method: http_1.RequestMethod.Get
         });
@@ -131,11 +131,11 @@ var Client = (function () {
             method: http_1.RequestMethod.Post
         }, true);
     };
-    Client.prototype.getUserCommentList = function (id, params) {
+    Client.prototype.getUserCommentList = function (name, params) {
         var searchParams = new http_1.URLSearchParams();
         Object.keys(params || {}).forEach(function (key) { searchParams.append(key, params[key]); });
         return this._request({
-            url: "/user/" + id + "/comment",
+            url: "/user/" + name + "/comment",
             search: searchParams,
             method: http_1.RequestMethod.Get
         });
@@ -154,9 +154,9 @@ var Client = (function () {
         });
     };
     // user 
-    Client.prototype.getUser = function (id) {
+    Client.prototype.getUser = function (name) {
         return this._request({
-            url: "/u/" + id,
+            url: "/u/" + name,
             method: http_1.RequestMethod.Get
         });
     };
