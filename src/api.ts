@@ -173,9 +173,9 @@ export class Client {
     }
 
     // user 
-    getUser(name) {
+    getUser(name: string) {
         return this._request({
-            url: `/u/${name}`,
+            url: `/user/${name}`,
             method: RequestMethod.Get
         })
     }

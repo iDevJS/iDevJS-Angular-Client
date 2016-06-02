@@ -156,7 +156,7 @@ var Client = (function () {
     // user 
     Client.prototype.getUser = function (name) {
         return this._request({
-            url: "/u/" + name,
+            url: "/user/" + name,
             method: http_1.RequestMethod.Get
         });
     };
