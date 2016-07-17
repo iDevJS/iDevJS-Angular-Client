@@ -64,7 +64,7 @@ export class Client {
         }
         options.url = `${this.API_ENDPOINT}${options.url}`
         return this.http.request(new Request(this.defaultOptions.merge(options)))
-            .map(res => res.json())
+            .map((res: any) => res.json())
     }
 
     // post
