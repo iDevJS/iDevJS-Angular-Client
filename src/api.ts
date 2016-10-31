@@ -1,7 +1,7 @@
-import {provide, Provider, Injectable} from '@angular/core'
-import {Http, URLSearchParams, Headers, Request, RequestMethod, RequestOptions, RequestOptionsArgs, Response, ResponseOptions, ResponseOptionsArgs, ResponseType} from '@angular/http'
+import { Provider, Injectable } from '@angular/core'
+import { Http, URLSearchParams, Headers, Request, RequestMethod, RequestOptions, RequestOptionsArgs, Response, ResponseOptions, ResponseOptionsArgs, ResponseType } from '@angular/http'
 import 'rxjs/add/operator/map'
-import {Observable} from 'rxjs/Observable'
+import { Observable } from 'rxjs/Observable'
 
 interface AuthConfigInterface {
     baseUrl: string,

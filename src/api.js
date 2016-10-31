@@ -5,9 +5,6 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-var __metadata = (this && this.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/map');
@@ -30,8 +27,7 @@ var AuthConfig = (function () {
         };
     };
     AuthConfig = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [Object])
+        core_1.Injectable()
     ], AuthConfig);
     return AuthConfig;
 }());
@@ -197,56 +193,31 @@ var Client = (function () {
         }, true);
     };
     __decorate([
-        Auth('idevjs_token'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', [Object, Object]), 
-        __metadata('design:returntype', void 0)
-    ], Client.prototype, "updatePost", null);
+        Auth('idevjs_token')
+    ], Client.prototype, "updatePost");
     __decorate([
-        Auth('idevjs_token'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', [Object]), 
-        __metadata('design:returntype', void 0)
-    ], Client.prototype, "addPost", null);
+        Auth('idevjs_token')
+    ], Client.prototype, "addPost");
     __decorate([
-        Auth('idevjs_token'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', [Object, Object]), 
-        __metadata('design:returntype', void 0)
-    ], Client.prototype, "addPostComment", null);
+        Auth('idevjs_token')
+    ], Client.prototype, "addPostComment");
     __decorate([
-        Auth('idevjs_token'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
-        __metadata('design:returntype', void 0)
-    ], Client.prototype, "getSelf", null);
+        Auth('idevjs_token')
+    ], Client.prototype, "getSelf");
     __decorate([
-        Auth('idevjs_token'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', [Object]), 
-        __metadata('design:returntype', void 0)
-    ], Client.prototype, "updateUserProfile", null);
+        Auth('idevjs_token')
+    ], Client.prototype, "updateUserProfile");
     __decorate([
-        Auth('idevjs_token'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', []), 
-        __metadata('design:returntype', void 0)
-    ], Client.prototype, "getUserSetting", null);
+        Auth('idevjs_token')
+    ], Client.prototype, "getUserSetting");
     __decorate([
-        Auth('idevjs_token'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', [Object]), 
-        __metadata('design:returntype', void 0)
-    ], Client.prototype, "updateUserSetting", null);
+        Auth('idevjs_token')
+    ], Client.prototype, "updateUserSetting");
     __decorate([
-        Auth('idevjs_token'), 
-        __metadata('design:type', Function), 
-        __metadata('design:paramtypes', [Object]), 
-        __metadata('design:returntype', void 0)
-    ], Client.prototype, "uploadImage", null);
+        Auth('idevjs_token')
+    ], Client.prototype, "uploadImage");
     Client = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [AuthConfig, http_1.Http])
+        core_1.Injectable()
     ], Client);
     return Client;
 }());
