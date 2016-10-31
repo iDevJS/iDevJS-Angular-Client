@@ -1,9 +1,10 @@
 {
   "name": "idevjs-angular-client",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "description": "Angular2 Client for iDevJS.com",
   "main": "index.js",
   "scripts": {
+    "build": "tsc ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -23,7 +24,7 @@
   },
   "homepage": "https://github.com/iDevJS/iDevJS-Angular-Client#readme",
   "peerDependencies": {
-    "@angular/core": "2.0.0-rc.1",
-    "@angular/http": "2.0.0-rc.1"
+    "@angular/core": "~2.1.1",
+    "@angular/http": "~2.1.1"
   }
 }
